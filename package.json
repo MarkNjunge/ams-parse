@@ -1,0 +1,8 @@
+{
+  "name": "ams-parse",
+  "version": "1.0.0",
+  "description": "Parser for Strathmore AMS",
+  "main": "src/app.js",
+  "author": "Mark Njung'e",
+  "license": "MIT"
+}
