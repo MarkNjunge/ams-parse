@@ -7,6 +7,7 @@ const endpoints = require("./endpoints");
   const browser = await puppeteer.launch({ headless: false });
 
   await endpoints.login(browser);
+  const attendance = await endpoints.attendance(browser);
 
-  await browser.close();
+  // await browser.close();
 })();

@@ -5,7 +5,7 @@ const student = {
   password: process.env.PASSWORD.toString() || ""
 };
 
-const urls = () => {
+function urls() {
   if (process.env.NODE_ENV === "production") {
     return {
       dashboard:
@@ -31,9 +31,9 @@ const urls = () => {
       feesStatement: "http://127.0.0.1:5500/public/fees-statement.html"
     };
   }
-};
+}
 
 module.exports = {
   student,
-  urls
+  urls: urls()
 };
