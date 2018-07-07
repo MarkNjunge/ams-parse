@@ -4,5 +4,12 @@
   "description": "Parser for Strathmore AMS",
   "main": "src/app.js",
   "author": "Mark Njung'e",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "puppeteer": "^1.5.0"
+  }
 }
