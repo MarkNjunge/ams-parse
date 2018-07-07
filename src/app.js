@@ -8,6 +8,7 @@ const endpoints = require("./endpoints");
 
   await endpoints.login(browser);
   const attendance = await endpoints.attendance(browser);
+  const details = await endpoints.details(browser);
 
-  // await browser.close();
+  await browser.close();
 })();
