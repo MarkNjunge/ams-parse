@@ -7,6 +7,9 @@ module.exports = async function(browser) {
   const page = await browser.newPage();
   await page.goto(config.urls.feesStatement);
 
+  const itemsOnLoan = await getValue(page, "#paramItemsOnHold");
+  const libraryCharges = await getValue(page, "#paramLibCharges");
+
   const totalsHTML = await getOuterHTML(
     page,
     "#content > table:nth-child(12) > tbody > tr:nth-child(13)"
@@ -22,6 +25,8 @@ module.exports = async function(browser) {
   const feeRecords = await extractFeeRecords(tableHTML);
 
   return {
+    itemsOnLoan,
+    libraryCharges,
     ...totals,
     balance,
     feeRecords
