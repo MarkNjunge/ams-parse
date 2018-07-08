@@ -8,7 +8,9 @@ const endpoints = require("./endpoints");
   const browser = await puppeteer.launch({ headless: false });
 
   try {
-    await endpoints.login(browser);
+    if (process.env.NODE_ENV === "production") {
+      await endpoints.login(browser);
+    }
     const attendance = await endpoints.attendance(browser);
     const details = await endpoints.details(browser);
     const dashboard = await endpoints.dashboard(browser);
