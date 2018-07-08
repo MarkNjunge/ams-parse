@@ -7,28 +7,26 @@ const student = {
 
 function urls() {
   if (process.env.NODE_ENV === "production") {
+    const baseUrl =
+      "https://su-sso.strathmore.edu/susams/servlet/edu/strathmore/ams/susams/";
+
     return {
-      dashboard:
-        "https://su-sso.strathmore.edu/susams/servlet/edu/strathmore/ams/susams/Dashboard.html?Command=LOAD",
-      myDetails:
-        "https://su-sso.strathmore.edu/susams/servlet/edu/strathmore/ams/susams/Details.html",
-      marks:
-        "https://su-sso.strathmore.edu/susams/servlet/edu/strathmore/ams/susams/lifecycle/coursework/Marks.html",
-      attendance:
-        "https://su-sso.strathmore.edu/susams/servlet/edu/strathmore/ams/susams/lifecycle/coursework/Attendance.html",
-      progressReport:
-        "https://su-sso.strathmore.edu/susams/servlet/edu/strathmore/ams/susams/lifecycle/coursework/ProgressReport.html",
-      feesStatement:
-        "https://su-sso.strathmore.edu/susams/servlet/edu/strathmore/ams/susams/financials/Statement.html"
+      dashboard: baseUrl + "Dashboard.html?Command=LOAD",
+      myDetails: baseUrl + "Details.html",
+      marks: baseUrl + "lifecycle/coursework/Marks.html",
+      attendance: baseUrl + "lifecycle/coursework/Attendance.html",
+      progressReport: baseUrl + "lifecycle/coursework/ProgressReport.html",
+      feesStatement: baseUrl + "financials/Statement.html"
     };
   } else {
+    const baseUrl = "http://127.0.0.1:5500/public/";
     return {
-      dashboard: "http://127.0.0.1:5500/public/dashboard.html",
-      myDetails: "http://127.0.0.1:5500/public/details.html",
-      marks: "http://127.0.0.1:5500/public/marks.html",
-      attendance: "http://127.0.0.1:5500/public/attendance.html",
-      progressReport: "http://127.0.0.1:5500/public/progress-report.html",
-      feesStatement: "http://127.0.0.1:5500/public/fees-statement.html"
+      dashboard: baseUrl + "dashboard.html",
+      myDetails: baseUrl + "details.html",
+      marks: baseUrl + "marks.html",
+      attendance: baseUrl + "attendance.html",
+      progressReport: baseUrl + "progress-report.html",
+      feesStatement: baseUrl + "fees-statement.html"
     };
   }
 }
