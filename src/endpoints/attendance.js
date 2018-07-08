@@ -3,19 +3,14 @@ const cheerio = require("cheerio");
 
 const config = require("./../config");
 
-module.exports = async function getAttendance(browser) {
+module.exports = async function(browser) {
+  console.log("Starting attendance...");
+
   const ATTENDANCE_TABLE_SELECTOR = "#content > table";
   const ROW_SELECTOR = "#content > table > tbody > tr:nth-child(INDEX)"; // eslint-disable-line
-  const ROW_CLASS = "table-row";
 
   const page = await browser.newPage();
   await page.goto(config.urls.attendance);
-
-  // Get the number of units (number of rows)
-  let numberOfUnits = await page.evaluate(sel => {
-    return document.getElementsByClassName(sel).length; // eslint-disable-line no-undef
-  }, ROW_CLASS);
-  console.log("There are", numberOfUnits, "units.");
 
   // Extract the html for the table
   const tableHandle = await page.$(ATTENDANCE_TABLE_SELECTOR);
@@ -24,7 +19,7 @@ module.exports = async function getAttendance(browser) {
 
   let units = [];
 
-  // Extract rows from the hteml
+  // Extract rows from the html
   const $ = cheerio.load(html);
   $("tr").each((i, elem) => {
     // Skip the header row
@@ -49,7 +44,7 @@ module.exports = async function getAttendance(browser) {
   // Remove null elements
   units = units.filter(Boolean);
 
-  console.log("Attendance retrieved.");
+  console.log("Completed attendance.");
 
   return units;
 };

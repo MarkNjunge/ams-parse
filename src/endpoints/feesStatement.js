@@ -2,27 +2,34 @@
 const cheerio = require("cheerio");
 
 const config = require("./../config");
+const utils = require("./../utils");
 
 module.exports = async function(browser) {
+  console.log("Starting fees statement...");
   const page = await browser.newPage();
   await page.goto(config.urls.feesStatement);
 
-  const itemsOnLoan = await getValue(page, "#paramItemsOnHold");
-  const libraryCharges = await getValue(page, "#paramLibCharges");
+  const itemsOnLoan = await utils.getInnerHTML(page, "#paramItemsOnHold");
+  const libraryCharges = await utils.getInnerHTML(page, "#paramLibCharges");
 
-  const totalsHTML = await getOuterHTML(
+  const totalsHTML = await utils.getOuterHTML(
     page,
     "#content > table:nth-child(12) > tbody > tr:nth-child(13)"
   );
   const totals = await extractTotals(totalsHTML);
 
-  const balance = await getValue(
+  const balance = await utils.getInnerHTML(
     page,
     "#content > table:nth-child(12) > tbody > tr:nth-child(14) > td:nth-child(2)"
   );
 
-  const tableHTML = await getOuterHTML(page, "#content > table:nth-child(12)");
+  const tableHTML = await utils.getOuterHTML(
+    page,
+    "#content > table:nth-child(12)"
+  );
   const feeRecords = await extractFeeRecords(tableHTML);
+
+  console.log("Completed fees statement.");
 
   return {
     itemsOnLoan,
@@ -32,20 +39,6 @@ module.exports = async function(browser) {
     feeRecords
   };
 };
-
-async function getValue(page, selector) {
-  return await page.evaluate(sel => {
-    return document.querySelector(sel).innerHTML; // eslint-disable-line
-  }, selector);
-}
-
-async function getOuterHTML(page, selector) {
-  const handle = await page.$(selector);
-  const value = await page.evaluate(body => body.outerHTML, handle);
-  await handle.dispose();
-
-  return value;
-}
 
 async function extractTotals(html) {
   html = "<table>" + html + "</table>";

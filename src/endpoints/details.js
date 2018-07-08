@@ -1,6 +1,7 @@
 const config = require("./../config");
 
-module.exports = async function getDetails(browser) {
+module.exports = async function(browser) {
+  console.log("Starting details...");
   const page = await browser.newPage();
   await page.goto(config.urls.myDetails);
 
@@ -82,6 +83,7 @@ module.exports = async function getDetails(browser) {
   // Important: Wait for everything to finish
   await Promise.all(promises);
 
-  // console.log(JSON.stringify(details, null, " "));
+  console.log("Completed details.");
+
   return details;
 };

@@ -2,41 +2,48 @@
 const cheerio = require("cheerio");
 
 const config = require("./../config");
+const utils = require("./../utils");
 
-module.exports = async function getDashboard(browser) {
+module.exports = async function(browser) {
+  console.log("Starting progress report...");
   const page = await browser.newPage();
   // Progress report takes over 30s
   page.setDefaultNavigationTimeout(60 * 1000);
   await page.goto(config.urls.progressReport);
 
-  const unitsCompleted = await getValue(
+  const unitsCompleted = await utils.getInnerHTML(
     page,
     "#sectionAverages > table > tbody > tr:nth-child(2) > td:nth-child(2)"
   );
 
-  const totalMarks = await getValue(
+  const totalMarks = await utils.getInnerHTML(
     page,
     "#sectionAverages > table > tbody > tr:nth-child(2) > td:nth-child(4)"
   );
 
-  const avgMark = await getValue(
+  const avgMark = await utils.getInnerHTML(
     page,
     "#sectionAverages > table > tbody > tr:nth-child(3) > td:nth-child(2)"
   );
 
-  const avgGrade = await getValue(
+  const avgGrade = await utils.getInnerHTML(
     page,
     "#sectionAverages > table > tbody > tr:nth-child(3) > td:nth-child(4)"
   );
 
-  const completedUnitsHTML = await getOuterHTML(page, "#sectionList > table");
+  const completedUnitsHTML = await utils.getOuterHTML(
+    page,
+    "#sectionList > table"
+  );
   const completedUnits = await extractCompletedUnits(completedUnitsHTML);
 
-  const unitsNotDoneHTML = await getOuterHTML(
+  const unitsNotDoneHTML = await utils.getOuterHTML(
     page,
     "#sectionIncompleteOb > table"
   );
   const unitsNotDone = await extractUnitsNotDone(unitsNotDoneHTML);
+
+  console.log("Completed progress report.");
 
   return {
     unitsCompleted,
@@ -47,20 +54,6 @@ module.exports = async function getDashboard(browser) {
     unitsNotDone
   };
 };
-
-async function getValue(page, selector) {
-  return await page.evaluate(sel => {
-    return document.querySelector(sel).innerHTML; // eslint-disable-line
-  }, selector);
-}
-
-async function getOuterHTML(page, selector) {
-  const handle = await page.$(selector);
-  const value = await page.evaluate(body => body.outerHTML, handle);
-  await handle.dispose();
-
-  return value;
-}
 
 async function extractCompletedUnits(html) {
   const units = [];

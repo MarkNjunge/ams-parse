@@ -23,6 +23,7 @@ const endpoints = require("./endpoints");
       progressReport
     };
     fs.writeFileSync("./output.json", JSON.stringify(output, null, " "));
+    console.log("Written to file");
   } catch (e) {
     console.log(e);
   }

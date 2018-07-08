@@ -2,8 +2,10 @@
 const cheerio = require("cheerio");
 
 const config = require("./../config");
+const utils = require("./../utils");
 
-module.exports = async function getDashboard(browser) {
+module.exports = async function(browser) {
+  console.log("Started dashboard...");
   const page = await browser.newPage();
   await page.goto(config.urls.dashboard);
 
@@ -12,28 +14,28 @@ module.exports = async function getDashboard(browser) {
   const image = await page.evaluate(body => body.src, photoHandle);
   await photoHandle.dispose();
 
-  const surname = await getInnerHTML(
+  const surname = await utils.getInnerHTML(
     page,
     "#content > div.right-col > div > table > tbody > tr:nth-child(2) > td:nth-child(2) > span"
   );
 
-  const otherNames = await getInnerHTML(
+  const otherNames = await utils.getInnerHTML(
     page,
     "#content > div.right-col > div > table > tbody > tr:nth-child(3) > td:nth-child(2) > span"
   );
-  const dateOfBirth = await getInnerHTML(
+  const dateOfBirth = await utils.getInnerHTML(
     page,
     "#content > div.right-col > div > table > tbody > tr:nth-child(4) > td:nth-child(2) > span"
   );
-  const mobileNo = await getInnerHTML(
+  const mobileNo = await utils.getInnerHTML(
     page,
     "#content > div.right-col > div > table > tbody > tr:nth-child(5) > td:nth-child(2) > span"
   );
-  const email = await getInnerHTML(
+  const email = await utils.getInnerHTML(
     page,
     "#content > div.right-col > div > table > tbody > tr:nth-child(6) > td:nth-child(2) > span"
   );
-  const previousSchool = await getInnerHTML(
+  const previousSchool = await utils.getInnerHTML(
     page,
     "#content > div.right-col > div > table > tbody > tr:nth-child(7) > td:nth-child(2) > span"
   );
@@ -58,6 +60,8 @@ module.exports = async function getDashboard(browser) {
 
   const mentor = await extractMentors(mentorsHTML);
 
+  console.log("Completed dashboard.");
+
   return {
     image,
     surname,
@@ -70,14 +74,6 @@ module.exports = async function getDashboard(browser) {
     mentor
   };
 };
-
-async function getInnerHTML(page, selector) {
-  const handle = await page.$(selector);
-  const value = await page.evaluate(body => body.innerHTML, handle);
-  await handle.dispose();
-
-  return value;
-}
 
 async function extactProgrammes(html) {
   const programmes = [];

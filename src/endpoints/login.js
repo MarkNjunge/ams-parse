@@ -1,6 +1,7 @@
 const config = require("../config/index.js");
 
-module.exports = async function login(browser) {
+module.exports = async function(browser) {
+  console.log("Starting login...");
   const USERNAME_SELECTOR = "#username";
   const PASSWORD_SELECTOR = "#password";
   const LOGIN_SELECTOR =
@@ -23,5 +24,9 @@ module.exports = async function login(browser) {
   // Click login button
   await loginPage.click(LOGIN_SELECTOR);
 
-  return await loginPage.waitForNavigation();
+  await loginPage.waitForNavigation();
+
+  console.log("Completed login.");
+
+  return;
 };
