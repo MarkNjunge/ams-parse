@@ -28,10 +28,10 @@ module.exports = async function(browser) {
 
   // Check for error message
   const errorHandle = await loginPage.$("#fm1 > div > span");
-  const error = await loginPage.evaluate(body => body.innerHTML, errorHandle);
-  await errorHandle.dispose();
+  if (errorHandle) {
+    const error = await loginPage.evaluate(body => body.innerHTML, errorHandle);
+    await errorHandle.dispose();
 
-  if (error) {
     throw new Error(error);
   }
 
