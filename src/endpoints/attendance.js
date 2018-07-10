@@ -33,7 +33,7 @@ module.exports = async function(browser) {
         group: cols[2],
         period: cols[3],
         lecturer: cols[4],
-        totalHourse: cols[5],
+        totalHours: cols[5],
         absentClasses: cols[6],
         absentHours: cols[7],
         percentAbsent: cols[8]
