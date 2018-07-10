@@ -26,8 +26,8 @@ const endpoints = require("./endpoints");
     };
     fs.writeFileSync("./output.json", JSON.stringify(output, null, " "));
     console.log("Written to file");
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    console.error("There was an error!", err.message);
   }
 
   await browser.close();

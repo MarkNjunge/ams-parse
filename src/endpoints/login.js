@@ -26,6 +26,15 @@ module.exports = async function(browser) {
 
   await loginPage.waitForNavigation();
 
+  // Check for error message
+  const errorHandle = await loginPage.$("#fm1 > div > span");
+  const error = await loginPage.evaluate(body => body.innerHTML, errorHandle);
+  await errorHandle.dispose();
+
+  if (error) {
+    throw new Error(error);
+  }
+
   console.log("Completed login.");
 
   return;
