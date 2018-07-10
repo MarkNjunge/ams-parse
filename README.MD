@@ -15,7 +15,7 @@ Currently supports:
 ## Installation
 
 1.  Clone the repository and install the dependencies using yarn (or npm)
-2.  Create a .env file similar matching .env.sample
+2.  Create a .env file similar to [.env.sample](./.env.sample)
 
 - In development environment, alternative endpoints will need to be provided. See [src/config/index.js](./src/config/index.js)
 
