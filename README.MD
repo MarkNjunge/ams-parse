@@ -17,10 +17,13 @@ Currently supports:
 1.  Clone the repository and install the dependencies using yarn (or npm)
 2.  Create a .env file similar to [.env.sample](./.env.sample)
 
+- The .env file is not required if arguments are passed via the run command. See usage.
 - In development environment, alternative endpoints will need to be provided. See [src/config/index.js](./src/config/index.js)
 
 ## Usage
 
 Run using `npm start`.
+
+Alternatively, `yarn start --number=<your_number> --password=<your_password>`
 
 The data will be written to `output.json`.

@@ -1,12 +1,24 @@
 require("dotenv").config();
 
+const nodeEnv = process.env.NODE_ENV || "production";
+
+if (!process.env.STUDENT_NO) {
+  console.log("Student number is required");
+  process.exit();
+}
+
+if (!process.env.PASSWORD) {
+  console.log("Password number is required");
+  process.exit();
+}
+
 const student = {
   studentNo: process.env.STUDENT_NO || "",
   password: process.env.PASSWORD.toString() || ""
 };
 
 function urls() {
-  if (process.env.NODE_ENV === "production") {
+  if (nodeEnv === "production") {
     const baseUrl =
       "https://su-sso.strathmore.edu/susams/servlet/edu/strathmore/ams/susams/";
 
@@ -32,6 +44,7 @@ function urls() {
 }
 
 module.exports = {
+  nodeEnv,
   student,
   urls: urls()
 };
