@@ -19,7 +19,6 @@ if (argv.password) {
 }
 
 const puppeteer = require("puppeteer");
-const fs = require("fs");
 const config = require("./config");
 
 const endpoints = require("./endpoints");
@@ -42,7 +41,9 @@ const endpoints = require("./endpoints");
       feesStatement,
       progressReport
     };
-    fs.writeFileSync("./output.json", JSON.stringify(output, null, " "));
+
+    await require("./writeToFile")(output);
+
     console.log("Written to file");
   } catch (err) {
     console.error("There was an error!", err.message);
