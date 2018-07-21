@@ -1,4 +1,4 @@
-# ams-parse
+# ams-parse [![Build Status](https://travis-ci.org/MarkNjunge/ams-parse.svg?branch=master)](https://travis-ci.org/MarkNjunge/ams-parse)
 
 Extracts data from Strathmore's AMS student's module using [Puppeteer](https://github.com/GoogleChrome/puppeteer) and [Cheerio](https://github.com/cheeriojs/cheerio).
 
