@@ -26,4 +26,4 @@ Run using `npm start`.
 
 Alternatively, `yarn start --number=<your_number> --password=<your_password>`
 
-The data will be written to `output.json`.
+The data will be written to the `output` folder.
