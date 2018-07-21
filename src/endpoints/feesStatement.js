@@ -1,11 +1,9 @@
 //@ts-check
 const cheerio = require("cheerio");
 
-const config = require("./../config");
 const utils = require("./../utils");
 
-module.exports = async function(browser) {
-  console.log("Starting fees statement...");
+module.exports = async function(config, browser) {
   const page = await browser.newPage();
   await page.goto(config.urls.feesStatement);
 
@@ -28,8 +26,6 @@ module.exports = async function(browser) {
     "#content > table:nth-child(12)"
   );
   const feeRecords = await extractFeeRecords(tableHTML);
-
-  console.log("Completed fees statement.");
 
   return {
     itemsOnLoan,

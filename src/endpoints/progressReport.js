@@ -1,11 +1,9 @@
 //@ts-check
 const cheerio = require("cheerio");
 
-const config = require("./../config");
 const utils = require("./../utils");
 
-module.exports = async function(browser) {
-  console.log("Starting progress report...");
+module.exports = async function(config, browser) {
   const page = await browser.newPage();
   // Progress report takes over 30s
   page.setDefaultNavigationTimeout(60 * 1000);
@@ -42,8 +40,6 @@ module.exports = async function(browser) {
     "#sectionIncompleteOb > table"
   );
   const unitsNotDone = await extractUnitsNotDone(unitsNotDoneHTML);
-
-  console.log("Completed progress report.");
 
   return {
     unitsCompleted,

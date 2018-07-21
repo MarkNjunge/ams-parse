@@ -1,11 +1,9 @@
 //@ts-check
 const cheerio = require("cheerio");
 
-const config = require("./../config");
 const utils = require("./../utils");
 
-module.exports = async function(browser) {
-  console.log("Started dashboard...");
+module.exports = async function(config, browser) {
   const page = await browser.newPage();
   await page.goto(config.urls.dashboard);
 
@@ -59,8 +57,6 @@ module.exports = async function(browser) {
   await mentorsHandle.dispose();
 
   const mentor = await extractMentors(mentorsHTML);
-
-  console.log("Completed dashboard.");
 
   return {
     image,

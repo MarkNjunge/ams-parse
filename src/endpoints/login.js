@@ -1,7 +1,5 @@
-const config = require("../config/index.js");
-
-module.exports = async function(browser) {
-  console.log("Starting login...");
+//@ts-check
+module.exports = async function(config, browser) {
   const USERNAME_SELECTOR = "#username";
   const PASSWORD_SELECTOR = "#password";
   const LOGIN_SELECTOR =
@@ -34,8 +32,6 @@ module.exports = async function(browser) {
 
     throw new Error(error);
   }
-
-  console.log("Completed login.");
 
   return;
 };
