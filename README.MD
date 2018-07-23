@@ -1,4 +1,5 @@
 # ams-parse [![Build Status](https://travis-ci.org/MarkNjunge/ams-parse.svg?branch=master)](https://travis-ci.org/MarkNjunge/ams-parse)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMarkNjunge%2Fams-parse.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMarkNjunge%2Fams-parse?ref=badge_shield)
 
 Extracts data from Strathmore's AMS student's module using [Puppeteer](https://github.com/GoogleChrome/puppeteer) and [Cheerio](https://github.com/cheeriojs/cheerio).
 
@@ -34,3 +35,6 @@ yarn install
 
 yarn test
 ```
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMarkNjunge%2Fams-parse.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FMarkNjunge%2Fams-parse?ref=badge_large)
