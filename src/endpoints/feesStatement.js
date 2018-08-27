@@ -1,4 +1,3 @@
-//@ts-check
 const cheerio = require("cheerio");
 
 const utils = require("./../utils");

@@ -1,4 +1,3 @@
-//@ts-check
 module.exports = async function(config, browser) {
   const USERNAME_SELECTOR = "#username";
   const PASSWORD_SELECTOR = "#password";

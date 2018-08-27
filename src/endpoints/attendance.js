@@ -1,9 +1,7 @@
-//@ts-check
 const cheerio = require("cheerio");
 
 module.exports = async function(config, browser) {
   const ATTENDANCE_TABLE_SELECTOR = "#content > table";
-  const ROW_SELECTOR = "#content > table > tbody > tr:nth-child(INDEX)"; // eslint-disable-line
 
   const page = await browser.newPage();
   await page.goto(config.urls.attendance);

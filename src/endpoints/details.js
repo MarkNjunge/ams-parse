@@ -68,9 +68,12 @@ module.exports = async function(config, browser) {
     const promise = page
       .evaluate(sel => {
         const element = document.getElementById(sel); // eslint-disable-line no-undef
-        return element
-          ? element.options[element.selectedIndex].innerHTML.trim()
-          : null;
+        if (element) {
+          //@ts-ignore
+          return element.options[element.selectedIndex].innerHTML.trim();
+        } else {
+          return null;
+        }
       }, dropdownIds[key])
       .then(value => (details[key] = value));
 

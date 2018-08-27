@@ -1,4 +1,3 @@
-//@ts-check
 // @ts-ignore
 const argv = require("yargs")
   .describe("number", "Student number")
