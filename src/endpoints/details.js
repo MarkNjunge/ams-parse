@@ -1,6 +1,10 @@
-module.exports = async function(config, browser) {
+/**
+ * @param {Object} browser Puppeteer browser
+ * @param {String} detailsUrl Details url
+ */
+module.exports = async function(browser, detailsUrl) {
   const page = await browser.newPage();
-  await page.goto(config.urls.myDetails);
+  await page.goto(detailsUrl);
 
   const details = {};
   const promises = [];

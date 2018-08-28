@@ -2,9 +2,13 @@ const cheerio = require("cheerio");
 
 const utils = require("./../utils");
 
-module.exports = async function(config, browser) {
+/**
+ * @param {Object} browser Puppeteer browser
+ * @param {String} dashboardUrl Dashboard url
+ */
+module.exports = async function(browser, dashboardUrl) {
   const page = await browser.newPage();
-  await page.goto(config.urls.dashboard);
+  await page.goto(dashboardUrl);
 
   // Get the photo
   const photoHandle = await page.$("#paramImageURL");

@@ -1,4 +1,14 @@
-module.exports = async function(config, browser) {
+/**
+ * @typedef Student
+ * @type {Object}
+ * @property {String} studentNo
+ * @property {String} password
+ */
+/**
+ * @param {Object} browser Puppeteer browser
+ * @param {Student} student Student from config
+ */
+module.exports = async function(browser, student) {
   const USERNAME_SELECTOR = "#username";
   const PASSWORD_SELECTOR = "#password";
   const LOGIN_SELECTOR =
@@ -12,11 +22,11 @@ module.exports = async function(config, browser) {
 
   // Input username
   await loginPage.click(USERNAME_SELECTOR);
-  await loginPage.keyboard.type(config.student.studentNo);
+  await loginPage.keyboard.type(student.studentNo);
 
   // Input password
   await loginPage.click(PASSWORD_SELECTOR);
-  await loginPage.keyboard.type(config.student.password);
+  await loginPage.keyboard.type(student.password);
 
   // Click login button
   await loginPage.click(LOGIN_SELECTOR);

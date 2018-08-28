@@ -26,22 +26,31 @@ const endpoints = require("./endpoints");
   const browser = await puppeteer.launch({ headless: false });
   try {
     if (config.nodeEnv === "production") {
-      await endpoints.login(config, browser);
+      await endpoints.login(browser, config.student);
       console.log("Login √");
     }
-    const attendance = await endpoints.attendance(config, browser);
+    const attendance = await endpoints.attendance(
+      browser,
+      config.urls.attendance
+    );
     console.log("Attendance √");
 
-    const details = await endpoints.details(config, browser);
+    const details = await endpoints.details(browser, config.urls.myDetails);
     console.log("Details √");
 
-    const dashboard = await endpoints.dashboard(config, browser);
+    const dashboard = await endpoints.dashboard(browser, config.urls.dashboard);
     console.log("Dashboard √");
 
-    const feesStatement = await endpoints.feesStatement(config, browser);
+    const feesStatement = await endpoints.feesStatement(
+      browser,
+      config.urls.feesStatement
+    );
     console.log("Fees statement √");
 
-    const progressReport = await endpoints.progressReport(config, browser);
+    const progressReport = await endpoints.progressReport(
+      browser,
+      config.urls.progressReport
+    );
     console.log("Progress report √");
 
     const output = {

@@ -2,11 +2,15 @@ const cheerio = require("cheerio");
 
 const utils = require("./../utils");
 
-module.exports = async function(config, browser) {
+/**
+ * @param {Object} browser Puppeteer browser
+ * @param {String} progressReportUrl Progress report url
+ */
+module.exports = async function(browser, progressReportUrl) {
   const page = await browser.newPage();
   // Progress report takes over 30s
   page.setDefaultNavigationTimeout(60 * 1000);
-  await page.goto(config.urls.progressReport);
+  await page.goto(progressReportUrl);
 
   const unitsCompleted = await utils.getInnerHTML(
     page,

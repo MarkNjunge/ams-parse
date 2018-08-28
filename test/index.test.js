@@ -20,7 +20,10 @@ afterAll(async () => {
 
 describe("should parse", () => {
   test("attendance", async () => {
-    const attendance = await endpoints.attendance(config, browser);
+    const attendance = await endpoints.attendance(
+      browser,
+      config.urls.attendance
+    );
 
     for (let index = 0; index < attendance.length; index++) {
       const element = attendance[index];
@@ -30,25 +33,31 @@ describe("should parse", () => {
   });
 
   test("details", async () => {
-    const details = await endpoints.details(config, browser);
+    const details = await endpoints.details(browser, config.urls.myDetails);
 
     expect(details).toEqual(expected.details);
   });
 
   test("dashboard", async () => {
-    const dashboard = await endpoints.dashboard(config, browser);
+    const dashboard = await endpoints.dashboard(browser, config.urls.dashboard);
 
     expect(dashboard).toEqual(expected.dashboard);
   });
 
   test("feesStatement", async () => {
-    const feesStatement = await endpoints.feesStatement(config, browser);
+    const feesStatement = await endpoints.feesStatement(
+      browser,
+      config.urls.feesStatement
+    );
 
     expect(feesStatement).toEqual(expected.feesStatement);
   });
 
   test("progressReport", async () => {
-    const progressReport = await endpoints.progressReport(config, browser);
+    const progressReport = await endpoints.progressReport(
+      browser,
+      config.urls.progressReport
+    );
 
     expect(progressReport).toEqual(expected.progressReport);
   });

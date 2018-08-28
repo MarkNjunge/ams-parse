@@ -1,10 +1,14 @@
 const cheerio = require("cheerio");
 
-module.exports = async function(config, browser) {
+/**
+ * @param {Object} browser Puppeteer browser instance
+ * @param {String} attendanceUrl Url for attendance page
+ */
+module.exports = async function(browser, attendanceUrl) {
   const ATTENDANCE_TABLE_SELECTOR = "#content > table";
 
   const page = await browser.newPage();
-  await page.goto(config.urls.attendance);
+  await page.goto(attendanceUrl);
 
   // Extract the html for the table
   const tableHandle = await page.$(ATTENDANCE_TABLE_SELECTOR);

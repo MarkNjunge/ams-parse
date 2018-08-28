@@ -2,9 +2,13 @@ const cheerio = require("cheerio");
 
 const utils = require("./../utils");
 
-module.exports = async function(config, browser) {
+/**
+ * @param {Object} browser Puppeteer browser
+ * @param {String} feesStatementUrl Fee Statement url
+ */
+module.exports = async function(browser, feesStatementUrl) {
   const page = await browser.newPage();
-  await page.goto(config.urls.feesStatement);
+  await page.goto(feesStatementUrl);
 
   const itemsOnLoan = await utils.getInnerHTML(page, "#paramItemsOnHold");
   const libraryCharges = await utils.getInnerHTML(page, "#paramLibCharges");
